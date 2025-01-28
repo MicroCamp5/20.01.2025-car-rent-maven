@@ -1,14 +1,31 @@
 package com.comarch.szkolenia.car.rent.gui;
 
+import com.comarch.szkolenia.car.rent.database.ICarRepository;
 import com.comarch.szkolenia.car.rent.model.Car;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class GUI {
-    private static final Scanner scanner = new Scanner(System.in);
+@RequiredArgsConstructor
+@Component
+@Scope(value = "prototype")
+public class GUI implements IGUI {
+    private final Scanner scanner;
+    private final ICarRepository carRepository;
 
-    public static String showMenuAndReadChoose() {
+    /*private final static GUI instance = new GUI();
+
+    private GUI() {
+
+    }*/
+
+    @Override
+    public String showMenuAndReadChoose() {
         System.out.println("1. List cars");
         System.out.println("2. Rent car");
         System.out.println("3. Exit");
@@ -16,8 +33,9 @@ public class GUI {
         return scanner.nextLine();
     }
 
-    public static void listCars(List<Car> cars) {
-        for (Car car : cars) {
+    @Override
+    public void listCars() {
+        for (Car car : this.carRepository.getCars()) {
             System.out.println(new StringBuilder()
                     .append(car.getBrand())
                     .append(" ")
@@ -33,16 +51,23 @@ public class GUI {
         }
     }
 
-    public static String readPlate() {
+    @Override
+    public String readPlate() {
         System.out.println("Enter plate:");
         return scanner.nextLine();
     }
 
-    public static void showRentResult(boolean result) {
+    @Override
+    public void showRentResult(boolean result) {
         System.out.println(result ? "Success !!" : "Error !!");
     }
 
-    public static void showWrongChoose() {
+    @Override
+    public void showWrongChoose() {
         System.out.println("Wrong choose !!");
     }
+
+    /*public static GUI getInstance() {
+        return instance;
+    }*/
 }

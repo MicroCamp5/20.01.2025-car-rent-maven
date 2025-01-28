@@ -1,11 +1,7 @@
 package com.comarch.szkolenia.car.rent.database;
 
-import com.comarch.szkolenia.car.rent.gui.GUI;
-import com.comarch.szkolenia.car.rent.gui.IGUI;
 import com.comarch.szkolenia.car.rent.model.Car;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,16 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Getter
-@Component
-//@Primary
-public class CarRepository implements ICarRepository {
+//@Component
+public class CarRepositoryV2 implements ICarRepository {
     private final List<Car> cars = new ArrayList<>();
 
-    public CarRepository() {
-        cars.add(new Car("Audi", "A5", 400.0, 2020, "KR11"));
-        cars.add(new Car("BMW", "5", 500.0, 2022, "KR22"));
-        cars.add(new Car("Kia", "Ceed", 300.0, 2021, "KR33"));
-        cars.add(new Car("Toyota", "Corolla", 300.0, 2019, "KR44"));
+    public CarRepositoryV2() {
+        cars.add(new Car("Audi", "A5", 400.0, 2020, "KR111"));
+        cars.add(new Car("BMW", "5", 500.0, 2022, "KR222"));
+        cars.add(new Car("Kia", "Ceed", 300.0, 2021, "KR333"));
+        cars.add(new Car("Toyota", "Corolla", 300.0, 2019, "KR444"));
     }
 
     @Override
